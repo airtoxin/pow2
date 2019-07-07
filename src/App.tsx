@@ -1,5 +1,6 @@
 import React from "react";
 import { css } from "emotion";
+import {Board} from "./features/Board";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
       alignItems: "center",
     })}>
       <h1>Pow2</h1>
+      <Board/>
     </div>
   );
 };
