@@ -2,7 +2,11 @@ import React from "react";
 import { css } from "emotion";
 import { Cell } from "../../components/Cell";
 
-export const Board: React.FunctionComponent = () => {
+export type Props = {
+  numbers: number[][];
+};
+
+export const Board: React.FunctionComponent<Props> = props => {
   return (
     <div
       className={css({
@@ -13,22 +17,9 @@ export const Board: React.FunctionComponent = () => {
         gridGap: "1em"
       })}
     >
-      <Cell>2</Cell>
-      <Cell></Cell>
-      <Cell>2</Cell>
-      <Cell></Cell>
-      <Cell>2</Cell>
-      <Cell></Cell>
-      <Cell>2</Cell>
-      <Cell></Cell>
-      <Cell>2</Cell>
-      <Cell></Cell>
-      <Cell>2</Cell>
-      <Cell></Cell>
-      <Cell>2</Cell>
-      <Cell></Cell>
-      <Cell>2</Cell>
-      <Cell></Cell>
+      {props.numbers.flat().map((n, i) => (
+        <Cell key={i}>{n === 0 ? null : n}</Cell>
+      ))}
     </div>
   );
 };
