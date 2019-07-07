@@ -1,6 +1,7 @@
 import React from "react";
 import { css } from "emotion";
 import { Board } from "./features/Board";
+import { GameHeader } from "./components/GameHeader";
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
       })}
     >
       <h1>Pow2</h1>
+      <GameHeader />
       <Board
         numbers={[[2, 4, 0, 0], [4, 0, 0, 0], [0, 0, 0, 0], [2, 0, 2, 0]]}
       />
