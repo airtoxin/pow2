@@ -6,7 +6,14 @@ import useKey from "react-use/lib/useKey";
 import { usePow2 } from "./hooks/usePow2";
 
 const App: React.FC = () => {
-  const { numberTable, moveLeft, moveRight, moveUp, moveDown } = usePow2();
+  const {
+    numberTable,
+    moveLeft,
+    moveRight,
+    moveUp,
+    moveDown,
+    isGameOver
+  } = usePow2();
   useKey("ArrowLeft", moveLeft, {}, [moveLeft]);
   useKey("ArrowRight", moveRight, {}, [moveRight]);
   useKey("ArrowUp", moveUp, {}, [moveUp]);
@@ -27,6 +34,7 @@ const App: React.FC = () => {
     >
       <h1>Pow2</h1>
       <GameHeader />
+      {isGameOver && "Game Over"}
       <Board numberTable={numberTable} />
     </div>
   );

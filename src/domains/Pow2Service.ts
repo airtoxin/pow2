@@ -1,5 +1,5 @@
 import { RowSlider } from "./RowSlider";
-import { isEqual, unzip, sample, reverse } from "lodash";
+import { isEqual, unzip, sample, reverse } from "lodash/fp";
 
 const transpose = unzip;
 
@@ -57,4 +57,10 @@ export class Pow2Service {
         this.randomSampler
       ).slideRight()
     );
+
+  isGameOver = (): boolean =>
+    isEqual(this.numberTable, this.slideLeft()) &&
+    isEqual(this.numberTable, this.slideRight()) &&
+    isEqual(this.numberTable, this.slideUp()) &&
+    isEqual(this.numberTable, this.slideDown());
 }

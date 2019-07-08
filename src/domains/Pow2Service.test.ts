@@ -4,7 +4,7 @@ import { Pow2Service } from "./Pow2Service";
 describe("Pow2Service", () => {
   describe("slideLeft", () => {
     it("should slide and fill", () => {
-      const randomSampler = <T>(samples: T[]) => samples[0];
+      const randomSampler: any = (samples: any[]) => samples[0];
       const dataset = [
         {
           nextNumber: 64,
@@ -30,6 +30,16 @@ describe("Pow2Service", () => {
           nextNumber: 64,
           numberTable: [[2, 2, 2], [2, 2, 2], [2, 2, 2]],
           expected: [[4, 2, 64], [4, 2, 0], [4, 2, 0]]
+        },
+        {
+          nextNumber: 2,
+          numberTable: [
+            [2, 4, 8, 2],
+            [2, 16, 4, 2],
+            [16, 8, 4, 2],
+            [2, 16, 8, 2]
+          ],
+          expected: [[2, 4, 8, 2], [2, 16, 4, 2], [16, 8, 4, 2], [2, 16, 8, 2]]
         }
       ];
 
