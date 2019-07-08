@@ -2,13 +2,16 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Pow2Service } from "../domains/Pow2Service";
 import usePrevious from "react-use/lib/usePrevious";
 import { ScoreCalculator } from "../domains/ScoreCalculator";
+import { pullAt } from "lodash/fp";
+
+const NEXT_NUMBER = 2;
 
 export const usePow2 = (size: number) => {
   const createInitialNumberTable = useCallback(
     () =>
       [...Array(size)].map((_, i) =>
         [...Array(size)].map((_, j) =>
-          i === j && Math.floor(size / 2) === i ? 2 : 0
+          i === j && Math.floor(size / 2) === i ? NEXT_NUMBER : 0
         )
       ),
     [size]
@@ -17,19 +20,22 @@ export const usePow2 = (size: number) => {
     createInitialNumberTable()
   );
   const prevTable = usePrevious(numberTable);
-  const pow2Service = useMemo(() => new Pow2Service(numberTable, 2), [
+  const pow2Service = useMemo(() => new Pow2Service(numberTable, NEXT_NUMBER), [
     numberTable
   ]);
   const [score, setScore] = useState(0);
-  const scoreDiff = useMemo(
-    () =>
-      prevTable ? ScoreCalculator.calculateScore(numberTable, prevTable) : 0,
-    [numberTable, prevTable]
-  );
-
+  const [scoreDiff, setScoreDiff] = useState(0);
   useEffect(() => {
-    setScore(score + scoreDiff);
-  });
+    const sd = prevTable
+      ? ScoreCalculator.calculateScore(
+          pullAt(numberTable.flat().indexOf(NEXT_NUMBER), numberTable.flat()),
+          prevTable.flat()
+        )
+      : 0;
+    setScoreDiff(sd);
+    setScore(score + sd);
+    // eslint-disable-next-line
+  }, [numberTable]);
 
   const moveLeft = useCallback(() => {
     setNumberTable(pow2Service.slideLeft());

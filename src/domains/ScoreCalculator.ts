@@ -1,23 +1,10 @@
-const difference = <T>(a1: T[], a2: T[]): T[] => {
-  let result = [...a1];
-
-  for (const n of a2) {
-    const idx = result.indexOf(n);
-    if (idx === -1) continue;
-
-    result.splice(idx, 1);
-  }
-
-  return result;
-};
-
 export class ScoreCalculator {
   static calculateScore = (
-    numberTable: number[][],
-    prevTable: number[][]
+    numberTable: number[],
+    prevTable: number[]
   ): number => {
-    let target = numberTable.flat().filter(n => n !== 0);
-    const prev = prevTable.flat();
+    let target = numberTable.filter(n => n !== 0);
+    const prev = prevTable;
     let score = 0;
 
     let cnt = 0;
@@ -36,3 +23,16 @@ export class ScoreCalculator {
     return score;
   };
 }
+
+const difference = <T>(a1: T[], a2: T[]): T[] => {
+  let result = [...a1];
+
+  for (const n of a2) {
+    const idx = result.indexOf(n);
+    if (idx === -1) continue;
+
+    result.splice(idx, 1);
+  }
+
+  return result;
+};

@@ -16,14 +16,15 @@ const App: React.FC = () => {
     moveDown,
     isGameOver,
     reset,
-    score
+    score,
+    scoreDiff
   } = pow2;
   useKey("ArrowLeft", moveLeft, {}, [moveLeft]);
   useKey("ArrowRight", moveRight, {}, [moveRight]);
   useKey("ArrowUp", moveUp, {}, [moveUp]);
   useKey("ArrowDown", moveDown, {}, [moveDown]);
 
-  useAutoPlay(pow2, 3000);
+  // useAutoPlay(pow2, 3000);
 
   return (
     <div
@@ -39,7 +40,12 @@ const App: React.FC = () => {
       })}
     >
       <h1>Pow2</h1>
-      <GameHeader nextNumber={2} score={score} reset={reset} />
+      <GameHeader
+        nextNumber={2}
+        score={score}
+        scoreDiff={scoreDiff}
+        reset={reset}
+      />
       {isGameOver && "Game Over"}
       <Board numberTable={numberTable} />
     </div>

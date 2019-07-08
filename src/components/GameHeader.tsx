@@ -5,6 +5,7 @@ import { Cell } from "./Cell";
 export type Props = {
   nextNumber: number;
   score: number;
+  scoreDiff: number;
   reset: () => void;
 };
 
@@ -36,6 +37,7 @@ export const GameHeader: React.FunctionComponent<Props> = props => {
       <div className={headerElementStyle}>
         <div>SCORE</div>
         <div>{props.score}</div>
+        <div>{props.scoreDiff}</div>
       </div>
     </div>
   );
