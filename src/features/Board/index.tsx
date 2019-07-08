@@ -11,9 +11,19 @@ export const Board: React.FunctionComponent<Props> = props => {
     <div
       className={css({
         display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr 1fr",
-        gridTemplateRows: "1fr 1fr 1fr 1fr",
-        gridTemplateAreas: `". . . ." ". . . ." ". . . ." ". . . ."`,
+        gridTemplateColumns: Array(props.numberTable.length)
+          .fill("1fr")
+          .join(" "),
+        gridTemplateRows: Array(props.numberTable.length)
+          .fill("1fr")
+          .join(" "),
+        gridTemplateAreas: Array(props.numberTable.length)
+          .fill(
+            `"${Array(props.numberTable.length)
+              .fill(".")
+              .join(" ")}"`
+          )
+          .join(" "),
         gridGap: "1em"
       })}
     >

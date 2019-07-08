@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { css } from "emotion";
 import { Board } from "./features/Board";
 import { GameHeader } from "./components/GameHeader";
 import useKey from "react-use/lib/useKey";
 import { usePow2 } from "./hooks/usePow2";
+import { useAutoPlay } from "./hooks/useAutoPlay";
 
 const App: React.FC = () => {
+  const pow2 = usePow2(4);
   const {
     numberTable,
     moveLeft,
@@ -13,11 +15,13 @@ const App: React.FC = () => {
     moveUp,
     moveDown,
     isGameOver
-  } = usePow2(4);
+  } = pow2;
   useKey("ArrowLeft", moveLeft, {}, [moveLeft]);
   useKey("ArrowRight", moveRight, {}, [moveRight]);
   useKey("ArrowUp", moveUp, {}, [moveUp]);
   useKey("ArrowDown", moveDown, {}, [moveDown]);
+
+  useAutoPlay(pow2, 5);
 
   return (
     <div
