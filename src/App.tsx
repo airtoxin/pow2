@@ -13,7 +13,7 @@ const App: React.FC = () => {
     moveUp,
     moveDown,
     isGameOver
-  } = usePow2();
+  } = usePow2(4);
   useKey("ArrowLeft", moveLeft, {}, [moveLeft]);
   useKey("ArrowRight", moveRight, {}, [moveRight]);
   useKey("ArrowUp", moveUp, {}, [moveUp]);
@@ -33,7 +33,7 @@ const App: React.FC = () => {
       })}
     >
       <h1>Pow2</h1>
-      <GameHeader />
+      <GameHeader nextNumber={2} />
       {isGameOver && "Game Over"}
       <Board numberTable={numberTable} />
     </div>

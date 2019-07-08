@@ -2,7 +2,11 @@ import React from "react";
 import { css } from "emotion";
 import { center } from "../classNames/center";
 
-export const Cell: React.FunctionComponent = props => (
+export type Props = {
+  className?: string;
+};
+
+export const Cell: React.FunctionComponent<Props> = props => (
   <div
     className={[
       center,
@@ -13,7 +17,8 @@ export const Cell: React.FunctionComponent = props => (
         borderRadius: "10%",
         boxShadow: "0.2rem 0.2rem 0.2rem",
         fontSize: "3rem"
-      })
+      }),
+      props.className
     ].join(" ")}
   >
     {props.children}

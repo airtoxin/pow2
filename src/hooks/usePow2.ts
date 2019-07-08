@@ -1,13 +1,14 @@
 import { useCallback, useMemo, useState } from "react";
 import { Pow2Service } from "../domains/Pow2Service";
 
-export const usePow2 = () => {
-  const [numberTable, setNumberTable] = useState([
-    [2, 4, 8, 2],
-    [2, 16, 4, 2],
-    [16, 8, 4, 2],
-    [2, 16, 8, 2]
-  ]);
+export const usePow2 = (size: number) => {
+  const [numberTable, setNumberTable] = useState<number[][]>(
+    [...Array(size)].map((_, i) =>
+      [...Array(size)].map((_, j) =>
+        i === j && Math.floor(size / 2) === i ? 2 : 0
+      )
+    )
+  );
   const pow2Service = useMemo(() => new Pow2Service(numberTable, 2), [
     numberTable
   ]);

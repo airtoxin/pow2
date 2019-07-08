@@ -4,11 +4,17 @@ import { isEqual, unzip, sample, reverse } from "lodash/fp";
 const transpose = unzip;
 
 export class Pow2Service {
+  private tNumberTable: number[][];
   constructor(
     private numberTable: number[][],
     private nextNumber: number,
     private randomSampler: typeof sample = sample
-  ) {}
+  ) {
+    this.tNumberTable = transpose(numberTable);
+  }
+
+  private new = (numberTable: number[][]): Pow2Service =>
+    new Pow2Service(numberTable, this.nextNumber, this.randomSampler);
 
   slideLeft = (): number[][] => {
     const slidedTable = this.numberTable.map(row =>
@@ -32,31 +38,15 @@ export class Pow2Service {
   };
 
   slideRight = (): number[][] =>
-    new Pow2Service(
-      this.numberTable.map(reverse),
-      this.nextNumber,
-      this.randomSampler
-    )
+    this.new(this.numberTable.map(reverse))
       .slideLeft()
       .map(reverse);
 
   slideUp = (): number[][] =>
-    transpose(
-      new Pow2Service(
-        transpose(this.numberTable),
-        this.nextNumber,
-        this.randomSampler
-      ).slideLeft()
-    );
+    transpose(this.new(this.tNumberTable).slideLeft());
 
   slideDown = (): number[][] =>
-    transpose(
-      new Pow2Service(
-        transpose(this.numberTable),
-        this.nextNumber,
-        this.randomSampler
-      ).slideRight()
-    );
+    transpose(this.new(this.tNumberTable).slideRight());
 
   isGameOver = (): boolean =>
     isEqual(this.numberTable, this.slideLeft()) &&
