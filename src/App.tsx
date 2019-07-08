@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { css } from "emotion";
 import { Board } from "./features/Board";
 import { GameHeader } from "./components/GameHeader";
@@ -14,14 +14,16 @@ const App: React.FC = () => {
     moveRight,
     moveUp,
     moveDown,
-    isGameOver
+    isGameOver,
+    reset,
+    score
   } = pow2;
   useKey("ArrowLeft", moveLeft, {}, [moveLeft]);
   useKey("ArrowRight", moveRight, {}, [moveRight]);
   useKey("ArrowUp", moveUp, {}, [moveUp]);
   useKey("ArrowDown", moveDown, {}, [moveDown]);
 
-  useAutoPlay(pow2, 5);
+  useAutoPlay(pow2, 3000);
 
   return (
     <div
@@ -37,7 +39,7 @@ const App: React.FC = () => {
       })}
     >
       <h1>Pow2</h1>
-      <GameHeader nextNumber={2} />
+      <GameHeader nextNumber={2} score={score} reset={reset} />
       {isGameOver && "Game Over"}
       <Board numberTable={numberTable} />
     </div>

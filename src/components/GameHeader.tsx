@@ -4,6 +4,8 @@ import { Cell } from "./Cell";
 
 export type Props = {
   nextNumber: number;
+  score: number;
+  reset: () => void;
 };
 
 export const GameHeader: React.FunctionComponent<Props> = props => {
@@ -16,7 +18,9 @@ export const GameHeader: React.FunctionComponent<Props> = props => {
         justifyContent: "space-between"
       })}
     >
-      <div className={headerElementStyle} />
+      <button className={headerElementStyle} onClick={props.reset}>
+        Reset
+      </button>
       <div className={headerElementStyle}>
         <div>NEXT</div>
         <Cell
@@ -29,7 +33,10 @@ export const GameHeader: React.FunctionComponent<Props> = props => {
           {props.nextNumber}
         </Cell>
       </div>
-      <div className={headerElementStyle}>score</div>
+      <div className={headerElementStyle}>
+        <div>SCORE</div>
+        <div>{props.score}</div>
+      </div>
     </div>
   );
 };
