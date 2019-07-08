@@ -3,7 +3,7 @@ import { css } from "emotion";
 import { Cell } from "../../components/Cell";
 
 export type Props = {
-  numbers: number[][];
+  numberTable: number[][];
 };
 
 export const Board: React.FunctionComponent<Props> = props => {
@@ -17,8 +17,8 @@ export const Board: React.FunctionComponent<Props> = props => {
         gridGap: "1em"
       })}
     >
-      {props.numbers.flat().map((n, i) => (
-        <Cell key={i}>{n === 0 ? null : n}</Cell>
+      {props.numberTable.flat().map((n, i) => (
+        <Cell key={Math.random()}>{n === 0 ? null : n}</Cell>
       ))}
     </div>
   );

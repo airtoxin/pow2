@@ -2,11 +2,20 @@ import React from "react";
 import { css } from "emotion";
 import { Board } from "./features/Board";
 import { GameHeader } from "./components/GameHeader";
+import useKey from "react-use/lib/useKey";
+import { usePow2 } from "./hooks/usePow2";
 
 const App: React.FC = () => {
+  const { numberTable, moveLeft, moveRight, moveUp, moveDown } = usePow2();
+  useKey("ArrowLeft", moveLeft, {}, [moveLeft]);
+  useKey("ArrowRight", moveRight, {}, [moveRight]);
+  useKey("ArrowUp", moveUp, {}, [moveUp]);
+  useKey("ArrowDown", moveDown, {}, [moveDown]);
+
   return (
     <div
       className={css({
+        userSelect: "none",
         backgroundColor: "blanchedalmond",
         textAlign: "center",
         color: "darkblue",
@@ -18,9 +27,7 @@ const App: React.FC = () => {
     >
       <h1>Pow2</h1>
       <GameHeader />
-      <Board
-        numbers={[[2, 4, 0, 0], [4, 0, 0, 0], [0, 0, 0, 0], [2, 0, 2, 0]]}
-      />
+      <Board numberTable={numberTable} />
     </div>
   );
 };
